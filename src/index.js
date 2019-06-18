@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import { View, Platform } from 'react-native';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { View, Platform } from "react-native";
+import PropTypes from "prop-types";
+import echarts from "./echarts.min";
+
 /* eslint-enable */
 
-import * as jsBuilder from './jsBuilder';
+import * as jsBuilder from "./jsBuilder";
 
 /* eslint-disable */
 var WebView;
@@ -186,4 +188,4 @@ class ECharts extends Component {
   }
 }
 
-export { ECharts };
+export { ECharts, echarts };

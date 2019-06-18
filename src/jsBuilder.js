@@ -1,8 +1,8 @@
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
-export const convertToPostMessageString = (obj) => {
+export const convertToPostMessageString = obj => {
   const result = JSON.stringify(obj, (key, val) => {
-    if (typeof val === 'function') {
+    if (typeof val === "function") {
       return val.toString();
     }
     return val;
@@ -11,11 +11,11 @@ export const convertToPostMessageString = (obj) => {
   return result;
 };
 
-export const toString = (obj) => {
+export const toString = obj => {
   if (obj === undefined) return JSON.stringify({});
 
   let result = JSON.stringify(obj, (key, val) => {
-    if (typeof val === 'function') {
+    if (typeof val === "function") {
       return `~ha~${val}~ha~`;
     }
     return val;
@@ -23,19 +23,26 @@ export const toString = (obj) => {
 
   do {
     result = result
-      .replace('"~ha~', '')
-      .replace('~ha~"', '')
-      .replace(/\\n/g, '')
+      .replace('"~ha~', "")
+      .replace('~ha~"', "")
+      .replace(/\\n/g, "")
       .replace(/\\\"/g, '"');
-  } while (result.indexOf('~ha~') >= 0);
+  } while (result.indexOf("~ha~") >= 0);
   return result;
 };
 
-export const getJavascriptSource = (props) => {
+export const getJavascriptSource = props => {
   const { OS } = Platform;
-  const renderer = props.canvas ? 'canvas' : 'svg';
+  const renderer = props.canvas ? "canvas" : "svg";
+  const height = `${props.height || 400}px`;
+  const width = props.width ? `${props.width}px` : "auto";
+  // const backgroundColor = props.backgroundColor;
 
   return `
+          document.getElementById('main').style.height = "${height}";
+          document.getElementById('main').style.width = "${width}";
+          // document.getElementById('main').style.backgroundColor = "${backgroundColor}";
+
           var chart = echarts.init(document.getElementById('main'), undefined, {renderer: '${renderer}'});
           chart.setOption(${toString(props.option)});
   
