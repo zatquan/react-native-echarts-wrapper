@@ -21,7 +21,8 @@ class ECharts extends Component {
     baseUrl: PropTypes.string,
     legacyMode: PropTypes.bool,
     canvas: PropTypes.bool,
-    onLoadEnd: PropTypes.func
+    onLoadEnd: PropTypes.func,
+    backgroundColor: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -29,43 +30,14 @@ class ECharts extends Component {
     onData: () => {},
     legacyMode: false,
     canvas: false,
-    onLoadEnd: () => {}
+    onLoadEnd: () => {},
+    backgroundColor: "#00000000"
   };
 
   constructor(props) {
     super(props);
     this.onGetHeight = null;
     this.callbacks = {};
-    const { baseUrl } = props;
-
-    this.html = `
-      <!DOCTYPE html>
-      <html lang="de">
-
-      <head>
-          <meta http-equiv="content-type" content="text/html; charset=utf-8">
-          <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
-          <style type="text/css">
-            html,body {
-              height: 100%;
-              width: 100%;
-              margin: 0;
-              padding: 0;
-              background-color:rgba(0, 0, 0, 0);
-            }
-            #main {
-              height: 100%;
-              background-color:rgba(0, 0, 0, 0);
-            }
-            </style>
-            <script src="${baseUrl}/echarts.min.js"></script>
-          </head>
-
-      <body>
-          <div id="main"></div>
-      </body>
-
-      </html>`;
   }
 
   onMessage = e => {
