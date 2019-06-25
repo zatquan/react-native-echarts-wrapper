@@ -107,6 +107,12 @@ export const getJavascriptSource = props => {
                 case "CLEAR":
                   chart.clear();
                   break;
+                case "OFF":
+                  chart.off(req.value);
+                  break;
+                case "ON":
+                  chart.on(req.value, req.func);
+                  break;
                 case "GET_OPTION":
                   var option = chart.getOption();
                   var data = {};

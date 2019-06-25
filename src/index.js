@@ -96,6 +96,23 @@ class ECharts extends Component {
     this.postMessage(data);
   };
 
+  off = value => {
+    const data = {
+      types: "OFF",
+      value
+    };
+    this.postMessage(data);
+  };
+
+  on = (value, func) => {
+    const data = {
+      types: "ON",
+      value,
+      func
+    };
+    this.postMessage(data);
+  };
+
   getWebViewRef = ref => {
     this.webview = ref;
   };
