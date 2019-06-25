@@ -7,7 +7,6 @@
 </p>
 
 <h4 align="center">ECharts wrapper build for <a href="https://facebook.github.io/react-native/" target="_blank">React Native</a>.</h4>
-
 <p align="center">
   <a>
     <img src="https://forthebadge.com/images/badges/built-with-love.svg">
@@ -88,31 +87,36 @@ Add the `index.html` from `node_modules/react-native-echarts-wrapper/src/` to yo
 | -------------- | ------ | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | option         | object | take a look at the examples | Allows you to set the chart configuration (https://ecomfe.github.io/echarts-examples/public/index.html). Never access anything related to your React-Native Javascript code within the options object. It won't work! Take a look at `onData` and `sendData`                                |
 | baseUrl        | string | file:///android_assets      | Use this property if you want to tell echarts where to look for local assets. You can use <a href="https://github.com/itinance/react-native-fs" target="_blank">RNFS</a> to get the directory path for Android/iOS. Take a look at <a href="#more-complex-example">More complex example</a> |
-| additionalCode | string | `alert('hello world');`     | Allows you to inject javascript code in the webview. It is used to access the echarts api to create more complex charts (e.G. callback on chart tap). Take a look at <a href="#more-complex-example">More complex example</a>                                                               |
-| legacyMode | bool | - | Uses Webview from 'react-native' instead of 'react-native-webview' |
+| additionalCode | string | `alert('hello world');`     | Allows you to inject javascript code in the webview. It is used to access the echarts api to create more complex charts (e.G. callback on chart tap). Take a look at <a href="#more-complex-example">More complex example</a> 注入自定义函数或者其他                                       |
+| legacyMode | bool | - | Uses Webview from 'react-native' instead of 'react-native-webview'  false为react-native-webview |
 | canvas | bool | - | Use 'canvas' as renderer instead of 'svg' (default) |
 
 ### Methods / Callbacks
 
-| Name      | Example                                              | Description                                                                                                                                                                                                                                                                                                                                                                                            |
-| --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| setOption | `this.chart.setOption(option);`                      | Allows you to set a chart configuration dyanmically (e.g. after initial setup with option prop). Take a look at <a href="#dynamic-loading-example">Dynamic loading example</a>                                                                                                                                                                                                                         |
+| Name      | Example                                              | Description                                                  |
+| --------- | ---------------------------------------------------- | ------------------------------------------------------------ |
+| setOption | `this.chart.setOption(option);`                      | Allows you to set a chart configuration dyanmically (e.g. after initial setup with option prop). Take a look at <a href="#dynamic-loading-example">Dynamic loading example</a> |
 | getOption | `this.chart.getOption((data) => console.log(data));` | Allows you to get the current option of a chart instance. First parameter is the result-callback. If you don't pass a second parameter the result-callback will be triggered with all option properties. Second parameter is an array of the e-charts-option-properties (e.g. `['dataZoom', 'series']`) you want to get. Take a look at <a href="#dynamic-loading-example">Dynamic loading example</a> |
-| clear     | `this.chart.clear();`                                | Allows you to clear the chart. Take a look at <a href="#more-complex-example">More complex example</a>                                                                                                                                                                                                                                                                                                 |
-| onData    | `<ECharts onData={this.onData} />`                   | This is the only way to receive data from the chart. It is called with the data provided by sendData (Webview functions).                                                                                                                                                                                                                                                                              |
+| clear     | `this.chart.clear();`                                | Allows you to clear the chart. Take a look at <a href="#more-complex-example">More complex example</a> |
+| onData    | `<ECharts onData={this.onData} />`                   | This is the only way to receive data from the chart. It is called with the data provided by sendData (Webview functions). |
+| off       | this.chart.off();                                    | 删除绑定                                                     |
+| on        | this.chart.on();                                     | 添加绑定,类似addEventListener()                              |
 
 ### Webview functions
 
 These functions can be called from code injected with `additionalCode` or within the echarts option.
 
-| Name     | Example                   | Description                                                                                                                                                                                                                                                            |
-| -------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| sendData | `sendData('Hello World')` | With this function you can communicate with React Native. **Attention** you can only send strings over to React-Native. `sendData('Hello World')` will call `onData` on the React Native side. Take a look at <a href="#more-complex-example">More complex example</a> |
+| Name            | type   | Example                   | Description                                                  |
+| --------------- | ------ | ------------------------- | ------------------------------------------------------------ |
+| sendData        |        | `sendData('Hello World')` | With this function you can communicate with React Native. **Attention** you can only send strings over to React-Native. `sendData('Hello World')` will call `onData` on the React Native side. Take a look at <a href="#more-complex-example">More complex example</a> |
+| height          | number |                           | 高度                                                         |
+| width           | number |                           | 宽度                                                         |
+| Backgroundcolor | string |                           | 画布背景色                                                   |
 
 ### Webview variables
 
-| Name  | Example          | Description                                                                                                                                                                             |
-| ----- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name  | Example          | Description                                                  |
+| ----- | ---------------- | ------------------------------------------------------------ |
 | chart | `chart.on(....)` | Allows you to access the echarts api (https://ecomfe.github.io/echarts-doc/public/en/api.html#echartsInstance). Take a look at <a href="#more-complex-example">More complex example</a> |
 
 ### Simple example
