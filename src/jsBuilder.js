@@ -34,12 +34,10 @@ export const toString = obj => {
 export const getJavascriptSource = props => {
   const { OS } = Platform;
   const renderer = props.canvas ? "canvas" : "svg";
-  const height = `${props.height || 400}px`;
   const width = props.width ? `${props.width}px` : "auto";
   const backgroundColor = props.backgroundColor;
   const data1 = props.data;
   return `
-          document.getElementById('main').style.height = "${height}";
           document.getElementById('main').style.width = "${width}";
           document.getElementById('main').style.backgroundColor = "${backgroundColor}";
 

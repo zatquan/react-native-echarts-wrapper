@@ -90,6 +90,8 @@ Add the `index.html` from `node_modules/react-native-echarts-wrapper/src/` to yo
 | additionalCode | string | `alert('hello world');`     | Allows you to inject javascript code in the webview. It is used to access the echarts api to create more complex charts (e.G. callback on chart tap). Take a look at <a href="#more-complex-example">More complex example</a> 注入自定义函数或者其他                                       |
 | legacyMode | bool | - | Uses Webview from 'react-native' instead of 'react-native-webview'  false为react-native-webview |
 | canvas | bool | - | Use 'canvas' as renderer instead of 'svg' (default) |
+| width | String | - | 宽度 |
+| Backgroundcolor | String | - | 背景色 |
 
 ### Methods / Callbacks
 
@@ -106,12 +108,9 @@ Add the `index.html` from `node_modules/react-native-echarts-wrapper/src/` to yo
 
 These functions can be called from code injected with `additionalCode` or within the echarts option.
 
-| Name            | type   | Example                   | Description                                                  |
-| --------------- | ------ | ------------------------- | ------------------------------------------------------------ |
-| sendData        |        | `sendData('Hello World')` | With this function you can communicate with React Native. **Attention** you can only send strings over to React-Native. `sendData('Hello World')` will call `onData` on the React Native side. Take a look at <a href="#more-complex-example">More complex example</a> |
-| height          | number |                           | 高度                                                         |
-| width           | number |                           | 宽度                                                         |
-| Backgroundcolor | string |                           | 画布背景色                                                   |
+| Name     | Example                   | Description                                                  |
+| -------- | ------------------------- | ------------------------------------------------------------ |
+| sendData | `sendData('Hello World')` | With this function you can communicate with React Native. **Attention** you can only send strings over to React-Native. `sendData('Hello World')` will call `onData` on the React Native side. Take a look at <a href="#more-complex-example">More complex example</a> |
 
 ### Webview variables
 
