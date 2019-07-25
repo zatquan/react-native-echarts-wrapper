@@ -103,6 +103,9 @@ Add the `index.html` from `node_modules/react-native-echarts-wrapper/src/` to yo
 | onData    | `<ECharts onData={this.onData} />`                   | This is the only way to receive data from the chart. It is called with the data provided by sendData (Webview functions). |
 | off       | this.chart.off();                                    | 删除绑定                                                     |
 | on        | this.chart.on();                                     | 添加绑定,类似addEventListener()                              |
+| restore   | this.chart.restore()                                 | 恢复状态                                                     |
+| refresh   | this.chart.refresh()                                 | 刷新                                                         |
+| dispose   | this.chart.dispose()                                 | dispose 释放                                                 |
 
 ### Webview functions
 

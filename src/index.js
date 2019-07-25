@@ -89,12 +89,37 @@ class ECharts extends Component {
     this.postMessage(data);
   };
 
+  
   clear = () => {
     const data = {
       types: "CLEAR"
-    };
-    this.postMessage(data);
-  };
+    }
+    this.postMessage(data)
+  }
+  restore = () => {
+    const data = {
+      types: "RESTORE"
+    }
+    this.postMessage(data)
+  }
+  refresh = () => {
+    const data = {
+      types: "REFRESH"
+    }
+    this.postMessage(data)
+  }
+  dispose = () => {
+    const data = {
+      types: "DISPOSE"
+    }
+    this.postMessage(data)
+  }
+  reinit = () => {
+    const data = {
+      types: "REINIT"
+    }
+    this.postMessage(data)
+  }
 
   off = value => {
     const data = {

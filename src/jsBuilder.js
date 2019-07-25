@@ -1,42 +1,42 @@
-import { Platform } from "react-native";
+import { Platform } from "react-native"
 
 export const convertToPostMessageString = obj => {
   const result = JSON.stringify(obj, (key, val) => {
     if (typeof val === "function") {
-      return val.toString();
+      return val.toString()
     }
-    return val;
-  });
+    return val
+  })
 
-  return result;
-};
+  return result
+}
 
 export const toString = obj => {
-  if (obj === undefined) return JSON.stringify({});
+  if (obj === undefined) return JSON.stringify({})
 
   let result = JSON.stringify(obj, (key, val) => {
     if (typeof val === "function") {
-      return `~ha~${val}~ha~`;
+      return `~ha~${val}~ha~`
     }
-    return val;
-  });
+    return val
+  })
 
   do {
     result = result
       .replace('"~ha~', "")
       .replace('~ha~"', "")
       .replace(/\\n/g, "")
-      .replace(/\\\"/g, '"');
-  } while (result.indexOf("~ha~") >= 0);
-  return result;
-};
+      .replace(/\\\"/g, '"')
+  } while (result.indexOf("~ha~") >= 0)
+  return result
+}
 
 export const getJavascriptSource = props => {
-  const { OS } = Platform;
-  const renderer = props.canvas ? "canvas" : "svg";
-  const width = props.width ? `${props.width}px` : "auto";
-  const backgroundColor = props.backgroundColor;
-  const data1 = props.data;
+  const { OS } = Platform
+  const renderer = props.canvas ? "canvas" : "svg"
+  const width = props.width ? `${props.width}px` : "auto"
+  const backgroundColor = props.backgroundColor
+  const data1 = props.data
   return `
           document.getElementById('main').style.width = "${width}";
           document.getElementById('main').style.backgroundColor = "${backgroundColor}";
@@ -102,8 +102,20 @@ export const getJavascriptSource = props => {
                 case "SET_OPTION":
                   chart.setOption(req.payload.option, req.payload.notMerge,req.payload.lazyUpate);
                   break;
+                case "REINIT":
+                  alert('reinit', chart)
+                  break;
                 case "CLEAR":
                   chart.clear();
+                  break;
+                case "RESTORE":
+                  chart.restore();
+                  break;
+                case "REFRESH":
+                  chart.refresh();
+                  break;
+                case "DISPOSE":
+                  chart.dispose();
                   break;
                 case "OFF":
                   chart.off(req.value);
@@ -132,5 +144,5 @@ export const getJavascriptSource = props => {
 
   
           ${props.additionalCode}
-      `;
-};
+      `
+}
